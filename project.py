@@ -168,11 +168,11 @@ def alg_mine(column="close"):
 
 def is_vowel(num):
     modded = (num % 26) // 1  # Mod and floor
-    if modded == 0 or
-    modded == 4 or
-    modded == 8 or
-    modded == 14 or
-    modded == 21:
+    if (modded == 0 or
+        modded == 4 or
+        modded == 8 or
+        modded == 14 or
+            modded == 21):
         return True
 
     return False
