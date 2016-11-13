@@ -15,22 +15,24 @@ Fall 2016
 # Holds total stocks in index 1
 account = [1000, 0]
 
+
 def test_data(col, day):
     data = read_AAPL_file()
     col_num = col_convert(col)
 
     return data[day][col_num]
 
+
 # Read the file in and return as a list of lists
 # Columns
 def read_AAPL_file():
-    infile = open("AAPL.csv","r")       # Open the file
+    infile = open("AAPL.csv", "r")       # Open the file
 
     data = infile.readlines()           # Read file as list of lines
     for i in range(len(data)):          # Run through each line
         data[i] = data[i].split(",")        # And split the data into a list
         data[i][6] = data[i][6].strip()     # also trim the endline char off
-    
+
     for i in range(1, len(data)):
         for j in range(1, 7):
             data[i][j] = float(data[i][j])
@@ -41,11 +43,14 @@ def read_AAPL_file():
 
     return data
 
+
 def get_capital():
     return account[0]
 
+
 def get_stock_count():
     return account[1]
+
 
 # Converts the col key to the index in the list of stock data for one day
 def col_convert(col):
@@ -62,18 +67,18 @@ def col_convert(col):
     elif col == "adj_close":
         return 6
 
+
 # Arguments are optional. Cleared with professor.
 def alg_moving_average(column="close", margin=20, perc_margin=.2):
     # Start by getting an organized copy of the data
     data = read_AAPL_file()
 
-    """The running average will be aquired by holding a continuously 
+    """The running average will be aquired by holding a continuously
     updated total average. that average will then be divided by the
     amount of active data points to aquire the average. These parameters
     will be played with to come up with the best strategy.
 
     """
-
 
     capital = account[0]
     stocks = account[1]
@@ -93,11 +98,11 @@ def alg_moving_average(column="close", margin=20, perc_margin=.2):
         data_margin_total += data[i][column]
     # Now, the total is calculated to the full margin
 
-    #Running average evaluations
+    # Running average evaluations
     for i in range(margin + 1, len(data)):
         # Calculate precentage difference
-        perc_diff_var = perc_diff(data_margin_total / margin, 
-                                    data[i][column])
+        perc_diff_var = perc_diff(data_margin_total / margin,
+                                  data[i][column])
 
         # Make a decision
         # If diff larger than 20%
@@ -109,7 +114,6 @@ def alg_moving_average(column="close", margin=20, perc_margin=.2):
             stocks -= 1                        # Sell a stock
             capital += data[i][column]         # Return some capital
 
-
         # Move average
         data_margin_total -= data[i - margin][column]
         data_margin_total += data[i][column]
@@ -117,8 +121,8 @@ def alg_moving_average(column="close", margin=20, perc_margin=.2):
     capital += data[len(data) - 1][column] * stocks
     stocks = 0
 
-
     return stocks, capital
+
 
 # Args are optional, cleared with professor.
 def alg_mine(column="close"):
@@ -140,7 +144,7 @@ def alg_mine(column="close"):
     stocks for each vowel..
 
     """
-    
+
     data = read_AAPL_file()         # Get organized data
     column = col_convert(column)    # Set the column
     capital = account[0]            # Set the capital
@@ -149,35 +153,43 @@ def alg_mine(column="close"):
     for i in range(1, len(data)):   # For every peice of data
         current_stock_price = data[i][column]
         current_stock_is_vowel = is_vowel(current_stock_price)
-        if current_stock_is_vowel == False and capital >= current_stock_price: 
+        if current_stock_is_vowel is False and capital >= current_stock_price:
             capital -= data[i][column]
             stocks += 1
-        elif current_stock_is_vowel == True:
+        elif current_stock_is_vowel is True:
             capital += data[i][column] * stocks
             stocks = 0
 
     capital += data[i][column] * stocks
     stocks = 0
-    
+
     return stocks, capital
-    
+
+
 def is_vowel(num):
-    modded = (num % 26) // 1 # Mod and floor
-    if modded == 0 or modded == 4 or modded == 8 or modded == 14 or modded == 21:
+    modded = (num % 26) // 1  # Mod and floor
+    if modded == 0 or
+    modded == 4 or
+    modded == 8 or
+    modded == 14 or
+    modded == 21:
         return True
+
     return False
 
 
 def perc_diff(num_one, num_two):
     return (num_one / num_two) - 1
 
+
 def main():
     alg1_stocks, alg1_balance = alg_moving_average()
-    
+
     alg2_stocks, alg2_balance = alg_mine()
 
-    print("alg_moving_average: Stocks", alg1_stocks," Capital $", alg1_balance)
-    #print("alg_mine: Stocks", alg2_stocks, " Capital $", alg2_balance)
+    print("alg_moving_average: Stocks", alg1_stocks,
+          " Capital $", alg1_balance)
+    # print("alg_mine: Stocks", alg2_stocks, " Capital $", alg2_balance)
 
 if __name__ == '__main__':
     main()
