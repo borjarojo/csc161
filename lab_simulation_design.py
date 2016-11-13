@@ -68,7 +68,7 @@ def main():
     steps = eval(input("How many steps should I take on each? "))
 
     av_dist = average_walk_distance(walks, steps)
-    print("Average distance from start:", av_dist)
+    print("Average distance from start: {0:0.2f}".format(av_dist))
 
 
 if __name__ == '__main__':
