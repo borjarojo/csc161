@@ -10,26 +10,23 @@ Fall 2016
 
 import random
 
+
 # Playing Card Class
 class PlayingCard:
     def __init__(self, rank, suit):
         self.rank = rank
         self.suit = suit
 
-
     def get_rank(self):
         return self.rank
-    
 
     def get_suit(self):
         return self.suit
 
-
-    def bj_value(self): 
+    def bj_value(self):
         if self.rank > 10:
             return 10
         return self.rank
-
 
     # Converts the int rank into a string
     def str_rank(self):
@@ -60,7 +57,6 @@ class PlayingCard:
         elif self.rank == 13:
             return "King"
 
-
     # Converts the letter of suit into a more full string
     def str_suit(self):
         if self.suit == "s":
@@ -76,6 +72,7 @@ class PlayingCard:
     def __repr__(self):
         return self.str_rank() + " of " + self.str_suit()
 
+
 def num_to_suit(num):
     num = num % 4
     if num == 0:
@@ -90,7 +87,7 @@ def num_to_suit(num):
 
 def main():
     print("Testing card class")
-    
+
     card_count = eval(input("How many cards would you like to see? "))
 
     """EXTRA CREDIT: The one line solution with a string and a randrange
@@ -105,4 +102,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
