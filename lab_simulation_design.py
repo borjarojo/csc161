@@ -12,13 +12,15 @@ import random
 
 # Returns a list of ints from 0-3 which represent the 4 directions
 # someone could walk in a grid pattern
+
+
 def random_walk_2d(step_count):
     path = []
-    
-    # Generate random ints between 0 and 3 
+
+    # Generate random ints between 0 and 3
     for i in range(step_count):
-        path.append(random.randrange(0,4))
-    
+        path.append(random.randrange(0, 4))
+
     return path
 
 
@@ -27,11 +29,13 @@ calculates the distance from it's start point.
 
 0 = up, 1 = right, 2 = down, 3 = left
 """
+
+
 def distance_walked(path):
     # Distance Vars
     x_distance = 0
     y_distance = 0
-    
+
     # Path eval
     for i in range(len(path)):
         if path[i] == 0:
@@ -48,13 +52,14 @@ def distance_walked(path):
 
     return distance
 
+
 def average_walk_distance(walk_count, step_count):
     average_distance = 0
 
     # Calculate total
     for i in range(walk_count):
         average_distance += distance_walked(random_walk_2d(step_count))
-    
+
     # Divide to get average
     average_distance /= walk_count
 
@@ -73,4 +78,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
