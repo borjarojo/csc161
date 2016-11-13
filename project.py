@@ -185,11 +185,12 @@ def perc_diff(num_one, num_two):
 def main():
     alg1_stocks, alg1_balance = alg_moving_average()
 
-    alg2_stocks, alg2_balance = alg_mine()
-
     print("alg_moving_average: Stocks", alg1_stocks,
           " Capital $", alg1_balance)
-    # print("alg_mine: Stocks", alg2_stocks, " Capital $", alg2_balance)
+
+    alg2_stocks, alg2_balance = alg_mine()
+
+    print("alg_mine: Stocks", alg2_stocks, " Capital $", alg2_balance)
 
 if __name__ == '__main__':
     main()
