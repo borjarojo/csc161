@@ -9,7 +9,9 @@ Lab Section TR 2:00-3:15pm
 Fall 2016
 """
 
-from tradinglib import Data, Account, Analysis
+from Data import Data
+from Account import Account
+from Analysis import Analysis
 
 
 def main():
